@@ -6,10 +6,12 @@ var ContainerView = Backbone.View.extend({
 
   template: $('#container-template').html(),
 
-  className: "container",
+  // className: "container",
+  id: "ratio-container",
+
 
   initialize: function() {
-    _.bindAll(this, "render");
+      _.bindAll(this, "render", "bind_update_fields");
     this.model = new Container;
     this.model.bind('change', this.render);
     this.model.view = this;
@@ -20,13 +22,13 @@ var ContainerView = Backbone.View.extend({
     values from the input fileds.
   */
   bind_update_fields: function() {
+    var view   = this;
     var fields = $('#container-a').find('.field');
     var events = {};
     _.each(fields, function(f) {
       events["change input." + f.name] = "update_" + f.name
     });
-    this.events = events;
-    return events;
+    view.events = {"change input.capacity": "update_capacity"};
   },
 
   update_limit: function(e) {
@@ -34,21 +36,22 @@ var ContainerView = Backbone.View.extend({
   },
 
   update_capacity: function(e) {
-
-    console.log(e);
-    // this.model.set({capacity: e.targe.value});
+    alert(e.target.value);
+    this.model.set({capacity: e.target.value});
   },
+
+  events: {"change input.capacity": "update_capacity"},
 
   render: function() {
     var rendered_data =  $.tmpl( this.template, this.model.toJSON() );
-    $('#container-a').html(rendered_data);
-    this.bind_update_fields();
+    // this.bind_update_fields();
+    $(this.el).html(rendered_data);
     return this;
   }
 
 });
 
 window.container_view = new ContainerView;
-window.container_view.render();
+$('#containers-zone').html(window.container_view.render().el);
 
 
