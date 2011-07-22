@@ -1,12 +1,10 @@
 <html>
 <head>
-
   <script type="text/javascript" src="js/vendor/underscore-min.js"></script>
   <script type="text/javascript" src="js/vendor/json2.js"></script>
   <script type="text/javascript" src="js/vendor/jquery-1.4.4.min.js"></script>
   <script type="text/javascript" src="js/vendor/jquery.tmpl.min.js"></script>
   <script type="text/javascript" src="js/vendor/backbone-min.js"></script>
-
 </head>
 
 <body>
@@ -18,9 +16,13 @@
    <div class="container">
      <h2>Container: </h2>
      <h3>${name}</h3>
+     <label for="capacity">Capacity</label>
+     <input class="field capacity" type="text" name="capacity" value="${capacity}"/>
+     <br/><br/>
+     <label for="limit">Limit</label>
+     <input  class="field limit" type="text" name="limit" value="${limit}"/>
    </div>
 </script>
-
 
 <script type="text/javascript" src="js/container.js"></script>
 </body>
