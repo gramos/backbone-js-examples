@@ -16,14 +16,7 @@ var ContainerView = Backbone.View.extend({
     this.model.view = this;
   },
 
-  events: function() {
-    var fields = ['capacity', 'limit']
-    var _events = {}
-    _.each(fields, function(f) {
-      _events["change input." + f] = "update_field"
-    });
-    return _events;
-  }(),
+  events: {"change input.field" : "update_field"},
 
   /*
     We need to update the model attrs if the user change
@@ -40,7 +33,6 @@ var ContainerView = Backbone.View.extend({
   render: function() {
     var rendered_data =  $.tmpl( this.template, this.model.toJSON() );
     $(this.el).html(rendered_data);
-    // this.bind_update_fields();
     return this;
   }
 
